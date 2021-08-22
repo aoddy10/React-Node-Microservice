@@ -1,29 +1,29 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function PostCreate() {
-  const [title, setTitle] = useState("");
+function CommentCreate({ postId }) {
+  const [content, setContent] = useState("");
 
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    await axios.post(`http://localhost:4000/posts`, {
-      title,
+    await axios.post(`http://localhost:4001/posts/${postId}/comments`, {
+      content,
     });
 
-    setTitle("");
+    setContent("");
   };
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form action="" onSubmit={onSubmit}>
         <div className="form-group">
-          <label htmlFor="">Title</label>
+          <label htmlFor="">New Comment</label>
           <input
             type="text"
             className="form-control"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
           />
         </div>
         <button className="btn btn-primary mt-2">Submit</button>
@@ -32,4 +32,4 @@ function PostCreate() {
   );
 }
 
-export default PostCreate;
+export default CommentCreate;
